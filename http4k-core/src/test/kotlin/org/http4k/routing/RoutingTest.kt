@@ -30,7 +30,7 @@ class RoutingTest {
             "/path1" bind GET to static(),
             "/path2" bind static(),
             "/path3" bind POST to static(), // this will never match, but we're proving that it will fall through
-            "/path3/{path:.*}" bind HttpHandler { Response(CREATED) }
+            "/path3/{path:.*}" bind { _: Request -> Response(CREATED) }
         )
 
         routes(Request(GET, "/path1/index.html")) shouldMatch hasStatus(OK)
